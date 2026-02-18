@@ -9,6 +9,8 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotNull;
+
 @Entity
 public class StaffRating {
 
@@ -25,31 +27,38 @@ public class StaffRating {
 	@Column(unique = true)
 	private String email;
 
+	@NotNull(message = "Role is required")
 	@Enumerated(EnumType.STRING)
 	private RoleType roleType;
-
+	
+	@NotNull(message = "Clarity is required")
 	@Min(value = 1, message = "Clarity must be between 1 and 10")
 	@Max(value = 10, message = "Clarity must be between 1 and 10")
 	private Integer clarity;
-
+	
+	@NotNull(message = "Niceness is required")
 	@Min(value = 1, message = "Niceness must be between 1 and 10")
 	@Max(value = 10, message = "Niceness must be between 1 and 10")
 	private Integer niceness;
-
+	
+	@NotNull(message = "Knowledgeable score is required")
 	@Min(value = 1, message = "Knowledgeable score must be between 1 and 10")
 	@Max(value = 10, message = "Knowledgeable score must be between 1 and 10")
 	private Integer knowledgeableScore;
+	
 
 	@Size(max = 300, message = "Comment must be at most 300 characters")
 	private String comment;
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-
+	
 	@PrePersist
 	public void prePersist() {
 		createdAt = LocalDateTime.now();
+		updatedAt = createdAt;
 	}
+	
 
 	@PreUpdate
 	public void preUpdate() {
@@ -57,8 +66,12 @@ public class StaffRating {
 	}
 
 	public double getOverallScore() {
+		if (clarity == null || niceness == null || knowledgeableScore == null) {
+			return 0.0;
+		}
 		return (clarity + niceness + knowledgeableScore) / 3.0;
-	}
+	}	
+	
 
 	// ----- getters and setters -----
 

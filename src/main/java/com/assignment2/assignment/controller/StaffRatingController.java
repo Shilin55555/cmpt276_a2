@@ -110,11 +110,21 @@ public String update(@PathVariable Long id,
 	return "redirect:/ratings";
 }
 
+// 1) GET: show confirmation page
+@GetMapping("/{id}/delete")
+public String confirmDelete(@PathVariable Long id, Model model) {
+    StaffRating rating = service.getOrThrow(id);
+    model.addAttribute("rating", rating);
+    return "ratings/delete";
+}
+
+// 2) POST: actually delete
 @PostMapping("/{id}/delete")
 public String delete(@PathVariable Long id) {
-	service.deleteById(id);
-	return "redirect:/ratings";
+    service.deleteById(id);
+    return "redirect:/ratings";
 }
+
 
 }
 
