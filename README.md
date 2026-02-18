@@ -9,9 +9,6 @@ This project includes validation and automated tests.
 - Create a new rating: `/ratings/new`
 - Edit an existing rating: `/ratings/{id}/edit`
 - Delete confirmation + delete action: `/ratings/{id}/delete`
-- Server-side validation (Jakarta Validation)
-- Automatic overall score calculation (based on rating fields)
-- Preloaded sample data for quick demo (if `data.sql` is present)
 
 ## Tech Stack
 - Java 17
