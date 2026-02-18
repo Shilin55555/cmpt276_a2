@@ -2,7 +2,7 @@
 
 ## What I Tested
 
-### 1) Application Context Smoke Test
+### 1) Application Context Test
 File:
 - `AssignmentApplicationTests.java`
 
