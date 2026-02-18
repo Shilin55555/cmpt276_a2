@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Rating</title>
+</head>
+<body>
+
+<h1>Edit Staff Rating</h1>
+
+<form th:action="@{/ratings/{id}/edit(id=${rating.id})}" th:object="${rating}" method="post">
+
+	<p>
+		<label>Name</label><br>
+		<input type="text" th:field="*{name}">
+		<br>
+		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+	</p>
+
+	<p>
+		<label>Email</label><br>
+		<input type="text" th:field="*{email}">
+		<br>
+		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+	</p>
+
+	<p>
+		<label>Role</label><br>
+		<select th:field="*{roleType}">
+			<option th:each="rt : ${roleTypes}"
+					th:value="${rt}"
+					th:text="${rt}">
+			</option>
+		</select>
+	</p>
+
+	<p>
+		<label>Clarity (1-10)</label><br>
+		<input type="number" min="1" max="10" th:field="*{clarity}">
+		<br>
+		<span th:if="${#fields.hasErrors('clarity')}" th:errors="*{clarity}"></span>
+	</p>
+
+	<p>
+		<label>Niceness (1-10)</label><br>
+		<input type="number" min="1" max="10" th:field="*{niceness}">
+		<br>
+		<span th:if="${#fields.hasErrors('niceness')}" th:errors="*{niceness}"></span>
+	</p>
+
+	<p>
+		<label>Knowledgeable (1-10)</label><br>
+		<input type="number" min="1" max="10" th:field="*{knowledgeableScore}">
+		<br>
+		<span th:if="${#fields.hasErrors('knowledgeableScore')}" th:errors="*{knowledgeableScore}"></span>
+	</p>
+
+	<p>
+		<label>Comment (optional, max 300)</label><br>
+		<textarea rows="4" cols="40" th:field="*{comment}"></textarea>
+		<br>
+		<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></span>
+	</p>
+
+	<button type="submit">Save</button>
+	<a th:href="@{/ratings}">Cancel</a>
+</form>
+
+</body>
+</html>

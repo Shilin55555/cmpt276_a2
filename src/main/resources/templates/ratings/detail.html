@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Rating Detail</title>
+</head>
+<body>
+
+<h1>Rating Detail</h1>
+
+<p><b>Display Title:</b> <span th:text="${displayTitle}"></span></p>
+
+<p><b>Name:</b> <span th:text="${rating.name}"></span></p>
+<p><b>Email:</b> <span th:text="${rating.email}"></span></p>
+<p><b>Role:</b> <span th:text="${rating.roleType}"></span></p>
+
+<p><b>Clarity:</b> <span th:text="${rating.clarity}"></span></p>
+<p><b>Niceness:</b> <span th:text="${rating.niceness}"></span></p>
+<p><b>Knowledgeable:</b> <span th:text="${rating.knowledgeableScore}"></span></p>
+
+<p><b>Comment:</b> <span th:text="${rating.comment}"></span></p>
+
+<p>
+	<a th:href="@{/ratings}">Back</a>
+	|
+	<a th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
+</p>
+
+<form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post"
+	  onsubmit="return confirm('Delete this rating?');">
+	<button type="submit">Delete</button>
+</form>
+
+
+</body>
+</html>
